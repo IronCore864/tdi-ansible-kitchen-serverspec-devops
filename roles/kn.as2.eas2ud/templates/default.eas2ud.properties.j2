@@ -1,0 +1,37 @@
+resfile.content.pattern                  = ^(?<key>\\S+)\\s+\\[(?<value>.*)\\]\\s*$
+resfile.content.mandatory.keys           = AS2FROM, AS2TO, FILENAME, CONTENT_TYPE
+queue.polltimeout.millis                 = 500
+processing.dir.scan.strategy             = {{ dir_scan_strategy | default("WatchService") }}
+processing.dir.scan.interval.millis      = {{ dir_scan_interval_millis | default(5000) }}
+processing.open.file.threshold           = 1000
+processing.textpart.contenttype.pattern  = application/(?:text|edi|xml|ans).*
+connection.idle.scan.interval.millis     = 1000
+connection.idle.max.lifetime.millis      = 18000
+connection.stale.check                   = true
+connection.request.timeout.millis        = 30000
+connection.timeout.millis                = 30000
+connection.socket.timeout                = 30000
+connection.retry.delay.millis            = 1000
+connection.retry.max                     = 10
+apext.ignore.pattern                     = ^\\s*(#|$)
+apext.content.pattern                    = (?<id>[^|]+)\\|(?<pattern>[^|]+)\\|(?<apid>[^|]+)
+apext.ssh.pubkey.file                    = {{ HOME_DIR }}/.ssh/id_rsa
+apext.ssh.knownhosts.file                = {{ HOME_DIR }}/.ssh/known_hosts
+apext.ssh.remote.host                    = {{ REMOTE_HOST }}
+apext.ssh.remote.port                    = 22
+apext.ssh.remote.user                    = mieref
+apext.ssh.remote.apext.file              = /ib/proc/masterdata/ap_ext.dat
+apext.ssh.poll.interval.millis           = 5000
+apext.special.apid.delete                = DELETE
+apext.special.apid.postpone              = POSTPONE
+
+queue                                    = {{ EAS2UD_QU }}
+
+{{ EAS2UD_QU }}.purge.done.files                     = true
+{{ EAS2UD_QU }}.queue.path                           = /as2/interface/in
+{{ EAS2UD_QU }}.queue.path.filepattern               = ^.*\\.res$
+{{ EAS2UD_QU }}.queue.path.done.folder               = /as2/interface/in/_done_
+{{ EAS2UD_QU }}.queue.path.postpone.folder           = /as2/interface/in/_postpone_
+{{ EAS2UD_QU }}.queue.path.error.folder              = /as2/interface/in/_errors_
+{{ EAS2UD_QU }}.upload.url                           = http://{{ REMOTE_HOST }}/eas2/listener
+{{ EAS2UD_QU }}.upload.threads.max                   = {{ EAS2UD_THREAD_MAX }}

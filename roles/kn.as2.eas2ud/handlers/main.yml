@@ -1,0 +1,4 @@
+---
+- name: restart eas2ud
+  become_user: eas2
+  shell: "cd {{ INSTALL_HOME_DIR }}/{{ DIR_NAME }} && ./eas2ud restart"

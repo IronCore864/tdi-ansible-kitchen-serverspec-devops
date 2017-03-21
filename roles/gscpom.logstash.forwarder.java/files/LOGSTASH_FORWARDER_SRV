@@ -1,0 +1,5 @@
+MODULE: Logstash forwarder .................(lf)
+ALIAS: lf
+START:sd3: startModule LOGSTASH_FORWARDER 'cd ${HOME}/mbin/logstash-forwarder-java-0.2.4 && /usr/java8_64/bin/java -jar logstash-forwarder-java-0.2.4.jar -config logstash-forwarder-config.json -logfile ${HOME}/log/logstash_forwarder -logfilenumber 5 & echo $! > ${IPA_SEM}/LOGSTASH_FORWARDER_SEM' 'logstash-forwarder-config.json$'
+STOP:sd3: kill -9 $(cat ${IPA_SEM}/LOGSTASH_FORWARDER_SEM) && rm ${IPA_SEM}/LOGSTASH_FORWARDER_SEM
+status:: MLC_CHECK( LOGSTASH_FORWARDER_SEM )

@@ -1,0 +1,13 @@
+---
+- name: Deploy configuration files for eas2ud.
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: eas2
+    group: as2
+    mode: 0644
+  with_items:
+    - { src: "{{ eas2ud_properties }}", dest: '{{ INSTALL_HOME_DIR }}/{{ DIR_NAME }}-{{ VERSION }}/eas2ud.properties' }
+    - { src: "{{ eas2ud_logback }}", dest: '{{ INSTALL_HOME_DIR }}/{{ DIR_NAME }}-{{ VERSION }}/logback.xml' }
+    - { src: "{{ eas2ud_wrapper }}", dest: '{{ INSTALL_HOME_DIR }}/{{ DIR_NAME }}-{{ VERSION }}/wrapper.conf' }
+  notify: restart eas2ud

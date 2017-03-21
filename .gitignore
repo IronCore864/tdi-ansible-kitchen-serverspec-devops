@@ -1,1 +1,10 @@
+*.retry
 *.pyc
+.kitchen
+*.swp
+roles/ansible-role-filebeat
+*.egg-info
+.python-version
+.ruby-version
+.cache
+.coverage

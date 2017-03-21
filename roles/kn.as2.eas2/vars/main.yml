@@ -1,0 +1,43 @@
+cron_job: "cd {{ HOME_DIR }}/e-AS2 && ./eas2s.srv start > /dev/null 2>> {{ HOME_DIR }}/crontab/log"
+cron_minute: "3,8,13,18,23,28,33,38,43,48,53,58"
+cron_name: "Attempt of e-AS2 server restart"
+
+conf_eas2: "EAS2.properties"
+conf_log4j: "log4j.properties"
+conf_wrapper: "wrapper.conf"
+
+FILE_OWNER: "eas2"
+FILE_GROUP: "as2"
+FILE_MODE_EXECUTE: "0744"
+FILE_MODE_EXECUTE_READ: "0755"
+file_mode_jmx: "0600"
+FILE_MODE_READ: "0644"
+
+INST_VARFILE: "response.varfile"
+inst_dir: "{{ HOME_DIR }}/e-AS2.{{ EAS2_VERSION }}"
+INST_LICENSE: "eas2.lic"
+inst_options: "-q -varfile {{ HOME_DIR }}/{{ INST_VARFILE }} -dir {{ inst_dir }}"
+
+EAS2_INST_FILE: "e-as2_unix_{{ EAS2_VERSION }}.sh"
+INSTALL_EAS2: "JAVA_HOME={{ JAVA_HOME }} {{ HOME_DIR }}/{{ EAS2_INST_FILE }} {{ inst_options }}"
+start_eas2: "{{ HOME_DIR }}/e-AS2/eas2s.srv start"
+stop_eas2: "{{ HOME_DIR }}/e-AS2/eas2s.srv stop"
+restart_eas2: "{{ HOME_DIR }}/e-AS2/eas2s.srv restart"
+
+mysql_script_dir: "{{ HOME_DIR }}/e-AS2/MySQL5"
+
+# Variables for the script tasks/housekeeping.yml
+hk_minute: "25"
+hk_hour: "01,04,07,10,13,16,19,22"
+hk_tmp_name: "Housekeeping of files in directory ${HOME}/e-AS2/tmp/"
+hk_tmp_hour: "02"
+hk_tmp_job: "{{ HOME_DIR }}/scripts/purge.ctb {{ HOME_DIR }}/e-AS2/tmp/ '*' 2 2>&1 | /ib/sw/ediscripts/logToEdistart.pl {{ HOME_DIR }}/crontab/log"
+hk_mdn_name: "Housekeeping of files in directory {{ item }}/in_mdn/"
+hk_mdn_job: "{{ HOME_DIR }}/scripts/purge.ctb {{ item }}/in_mdn/ '*' 30 2>&1 | /ib/sw/ediscripts/logToEdistart.pl {{ HOME_DIR }}/crontab/log"
+hk_done_name: "Housekeeping of files in directory {{ item }}/in/_done_/"
+hk_done_job: "{{ HOME_DIR }}/scripts/purge.ctb {{ item }}/in/_done_/ '*' 2 2>&1 | /ib/sw/ediscripts/logToEdistart.pl {{ HOME_DIR }}/crontab/log"
+hk_in_errors_name: "Housekeeping of files in directory {{ item }}/in/_errors_/"
+hk_in_errors_job: "{{ HOME_DIR }}/scripts/purge.ctb {{ item }}/in/_errors_/ '*' 30 2>&1 | /ib/sw/ediscripts/logToEdistart.pl {{ HOME_DIR }}/crontab/log"
+hk_out_errors_name: "Housekeeping of files in directory {{ item }}/out/*/_errors_/"
+hk_out_errors_job: "{{ HOME_DIR }}/scripts/purge.ctb.new \"{{ item }}/out/*/_errors_/\" '*' 30 2>&1 | /ib/sw/ediscripts/logToEdistart.pl {{ HOME_DIR }}/crontab/log"
+

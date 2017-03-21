@@ -1,0 +1,84 @@
+wrapper.lang.folder=../lang
+
+set.JAVA_HOME={{ JAVA_HOME }}
+wrapper.java.command={{ JAVA_HOME }}/bin/java
+
+
+wrapper.java.mainclass=org.tanukisoftware.wrapper.WrapperSimpleApp
+
+wrapper.java.classpath.1=lib/KNIB-App-EAS2UD.jar
+wrapper.java.classpath.2=lib/activation-1.1.jar
+wrapper.java.classpath.3=lib/commons-codec-1.6.jar
+wrapper.java.classpath.4=lib/commons-configuration-1.9.jar
+wrapper.java.classpath.5=lib/commons-lang-2.6.jar
+wrapper.java.classpath.6=lib/commons-logging-1.1.3.jar
+wrapper.java.classpath.7=lib/guava-15.0.jar
+wrapper.java.classpath.8=lib/httpclient-4.3.1.jar
+wrapper.java.classpath.9=lib/httpcore-4.3.jar
+wrapper.java.classpath.10=lib/httpmime-4.3.1.jar
+wrapper.java.classpath.11=lib/jcl-over-slf4j-1.7.5.jar
+wrapper.java.classpath.12=lib/jsch-0.1.51.jar
+wrapper.java.classpath.13=lib/jul-to-slf4j-1.7.5.jar
+wrapper.java.classpath.14=lib/log4j-over-slf4j-1.7.5.jar
+wrapper.java.classpath.15=lib/logback-classic-1.0.13.jar
+wrapper.java.classpath.16=lib/logback-core-1.0.13.jar
+wrapper.java.classpath.17=lib/mail-1.4.jar
+wrapper.java.classpath.18=lib/slf4j-api-1.7.5.jar
+wrapper.java.classpath.19=lib/wrapper.jar
+wrapper.java.classpath.20=.
+
+wrapper.java.library.path.1=lib
+
+wrapper.java.additional.auto_bits=TRUE
+
+wrapper.java.additional.1=-server
+wrapper.java.additional.4=-Dsun.net.inetaddr.ttl=30
+
+wrapper.java.initmemory=64
+
+wrapper.java.maxmemory=1024
+
+wrapper.app.parameter.1=com.kn.eas2ud.UploadDaemon
+
+
+wrapper.console.title=Test Wrapper Sample Application
+wrapper.console.format=PM
+wrapper.console.loglevel={{ LOG_LEVEL }}
+
+wrapper.logfile=wrapper.log
+wrapper.logfile.format=LPTM
+wrapper.logfile.loglevel={{ LOG_LEVEL }}
+wrapper.logfile.maxsize=0
+wrapper.logfile.maxfiles=0
+
+wrapper.syslog.loglevel=NONE
+
+wrapper.ignore_sequence_gaps=TRUE
+
+wrapper.pidfile.strict=TRUE
+
+wrapper.check.deadlock=TRUE
+wrapper.check.deadlock.interval=10
+wrapper.check.deadlock.action=RESTART
+wrapper.check.deadlock.output=FULL
+
+wrapper.filter.trigger.999=wrapper.filter.trigger.*java.lang.OutOfMemoryError
+wrapper.filter.allow_wildcards.999=TRUE
+wrapper.filter.action.999=NONE
+wrapper.filter.trigger.1000=[Loaded java.lang.OutOfMemoryError
+wrapper.filter.action.1000=NONE
+wrapper.filter.trigger.1001=java.lang.OutOfMemoryError
+wrapper.filter.action.1001=RESTART
+wrapper.filter.message.1001=The JVM has run out of memory.
+
+wrapper.event.jvm_restart.email.body=The JVM was restarted.\n\nPlease check on its status.\n
+
+wrapper.name=testwrapper
+
+wrapper.displayname=Test Wrapper Sample Application
+
+wrapper.description=Test Wrapper Sample Application Description
+
+wrapper.ntservice.dependency.1=
+wrapper.ntservice.starttype=AUTO_START
+wrapper.ntservice.interactive=false

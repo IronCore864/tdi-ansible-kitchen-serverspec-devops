@@ -1,0 +1,9 @@
+- name: Ensure /etc/hosts IP address
+  lineinfile:
+    name: /etc/hosts
+    regexp: '{{inventory_hostname}}'
+    line: '{{ ansible_eth0.ipv4.address }} {{ansible_fqdn}} {{inventory_hostname}}'
+    owner: root
+    group: root
+    mode: 0644
+  when: update_etc_hosts == true

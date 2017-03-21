@@ -1,0 +1,43 @@
+---
+- name: Ensure as2 group exists.
+  group:
+    name: as2 
+    gid: 600
+    state: present
+
+- name: Install ksh
+  yum:
+    name: ksh
+    state: latest
+
+- name: Ensure eas2 user exists.
+  user:
+    name: eas2
+    uid: 600
+    group: as2
+    shell: /bin/ksh
+    state: present
+
+- name: Ensure as2 dir exists.
+  file:
+    path: /as2
+    state: directory
+    owner: "eas2"
+    group: "as2"
+    mode: 0755
+
+- name: Ensure eas2 user home dir exists.
+  file:
+    path: /as2/eas2
+    state: directory
+    owner: "eas2"
+    group: "as2"
+    mode: 0755
+
+# set home dir
+- name: Ensure eas2 user exists.
+  user:
+    name: eas2
+    home: /as2/eas2
+    state: present
+

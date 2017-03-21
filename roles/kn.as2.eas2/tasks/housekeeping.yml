@@ -1,0 +1,103 @@
+---
+- name: Check if directory {{ HOME_DIR }}/crontab exists
+  stat:
+    path: "{{ HOME_DIR }}/crontab"
+  register: crontab
+
+- name: Check if directory /ib/sw/ediscripts exists
+  stat:
+    path: "/ib/sw/ediscripts"
+  register: sw
+
+- name: Create directory {{ HOME_DIR }}/crontab if needed
+  file:
+    path: "{{ HOME_DIR }}/crontab"
+    mode: "{{ FILE_MODE_EXECUTE }}"
+    owner: "{{ FILE_OWNER }}"
+    group: "{{ FILE_GROUP }}"
+    recurse: yes
+    state: directory
+  when: crontab.stat.exists == False
+
+- name: Create directory /ib/sw/ediscripts if needed
+  file:
+    path: "/ib/sw/ediscripts"
+    mode: "{{ FILE_MODE_EXECUTE }}"
+    owner: "{{ FILE_OWNER }}"
+    group: "{{ FILE_GROUP }}"
+    recurse: yes
+    state: directory
+  when: sw.stat.exists == False
+
+- name: Download purge.ctb script and store it into /ib/sw/ediscripts/
+  get_url:
+    url: "http://dehamsl1806.int.kn/ansible/artifacts/eas2/purge.ctb"
+    dest: "/ib/sw/ediscripts/purge.ctb"
+    mode: "{{ FILE_MODE_EXECUTE }}"
+    owner: "{{ FILE_OWNER }}"
+    group: "{{ FILE_GROUP }}"
+    force: yes
+    use_proxy: no
+
+- name: Download logToEdistart.pl script and store it into /ib/sw/ediscripts/
+  get_url:
+    url: "http://dehamsl1806.int.kn/ansible/artifacts/eas2/logToEdistart.pl"
+    dest: "/ib/sw/ediscripts/logToEdistart.pl"
+    mode: "{{ FILE_MODE_EXECUTE }}"
+    owner: "{{ FILE_OWNER }}"
+    group: "{{ FILE_GROUP }}"
+    force: yes
+    use_proxy: no
+
+- name: Add housekeeping job for directory ${HOME}/e-AS2/tmp
+  cron:
+    name: "{{ hk_tmp_name }}"
+    user: "eas2"
+    minute: "{{ hk_minute }}"
+    hour: "{{ hk_tmp_hour }}"
+    job: "{{ hk_tmp_job }}"
+
+- name: Change value of interface_dirs if more than one interface dir exists
+  set_fact:
+    interface_dirs: [ '{{ interface_root_primary }}', '{{ interface_root_secondary }}' ]
+  when: interface_root_secondary is defined
+
+- name: Add housekeeping job for directory {{ interface_root_primary }}/in_mdn/ (and {{ interface_root_secondary }}/in_mdn/)
+  cron:
+    name: "{{ hk_mdn_name }}"
+    user: "eas2"
+    minute: "{{ hk_minute }}"
+    hour: "{{ hk_hour }}"
+    job: "{{ hk_mdn_job }}"
+  with_items:
+    - "{{ interface_dirs }}"
+
+- name: Add housekeeping job for directory {{ interface_root_primary }}/in/_done_/ (and {{ interface_root_secondary }}/in/_done_/)
+  cron:
+    name: "{{ hk_done_name }}"
+    user: "eas2"
+    minute: "{{ hk_minute }}"
+    hour: "{{ hk_hour }}"
+    job: "{{ hk_done_job }}"
+  with_items:
+    - "{{ interface_dirs }}"
+
+- name: Add housekeeping job for directory {{ interface_root_primary }}/in/_errors_/ (and {{ interface_root_secondary }}/in/_errors_/)
+  cron:
+    name: "{{ hk_in_errors_name }}"
+    user: "eas2"
+    minute: "{{ hk_minute }}"
+    hour: "{{ hk_hour }}"
+    job: "{{ hk_in_errors_job }}"
+  with_items:
+    - "{{ interface_dirs }}"
+
+- name: Add housekeeping job for directory {{ interface_root_primary }}/out/*/_errors_/ (and {{ interface_root_secondary }}/out/*/_errors_/)
+  cron:
+    name: "{{ hk_out_errors_name }}"
+    user: "eas2"
+    minute: "{{ hk_minute }}"
+    hour: "{{ hk_hour }}"
+    job: "{{ hk_out_errors_job }}"
+  with_items:
+    - "{{ interface_dirs }}"

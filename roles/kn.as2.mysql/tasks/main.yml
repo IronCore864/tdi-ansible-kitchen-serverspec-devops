@@ -1,0 +1,21 @@
+---
+- yum: name={{ item }} state=installed
+  with_items:
+    - python-devel.x86_64
+    - MySQL-python.x86_64
+    - mysql
+
+- get_url:
+    url: "https://bootstrap.pypa.io/get-pip.py"
+    dest: "/tmp/get-pip.py"
+  environment: "{{proxy_env}}"
+
+- command: "python /tmp/get-pip.py"
+  environment: "{{proxy_env}}"
+
+- pip: name={{ item }}
+  with_items:
+    - simplejson
+    - MySQL-python
+  environment: "{{proxy_env}}"
+

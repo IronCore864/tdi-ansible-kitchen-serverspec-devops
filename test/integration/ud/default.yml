@@ -1,0 +1,10 @@
+---
+- hosts: test-kitchen 
+  become: True
+  roles:
+    - role: kn.as2.vm.preparation
+      update_etc_hosts: false
+    - role: "kn.as2.eas2ud"
+      ansible_python_interpreter: /usr/local/bin/python2.7
+      HOME_DIR: "/as2/eas2"
+      JAVA_HOME: /opt/jdk1.8.0_112

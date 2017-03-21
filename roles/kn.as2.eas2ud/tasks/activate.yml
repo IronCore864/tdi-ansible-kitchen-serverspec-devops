@@ -1,0 +1,10 @@
+- name: Stop current eas2ud
+  shell: "cd {{ INSTALL_HOME_DIR }}/{{ DIR_NAME }} && ./eas2ud stop"
+  ignore_errors: yes
+
+- name: Create sym link for eas2ud directory
+  file:
+    src: "{{ INSTALL_HOME_DIR }}/{{ DIR_NAME }}-{{ VERSION }}"
+    dest: "{{ INSTALL_HOME_DIR }}/{{ DIR_NAME }}"
+    force: yes
+    state: link

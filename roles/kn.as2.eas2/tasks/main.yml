@@ -1,0 +1,25 @@
+- include: check.yml
+
+- stat:
+    path: "{{ JAVA_HOME }}"
+  register: j
+
+- include: update_jdk8policy.yml
+  when: j.stat.exists
+
+- stat:
+    path: "{{ inst_dir }}"
+  register: p
+
+- include: install.yml
+  when: p.stat.isdir is not defined or overwrite_existing_version
+
+- include: db.yml
+  when: eas2_db_mode != "hsql"
+
+- include: configure.yml
+
+- include: post_install_check.yml
+  when: START_EAS2_AFTER_INSTALLATION == true
+
+- include: housekeeping.yml

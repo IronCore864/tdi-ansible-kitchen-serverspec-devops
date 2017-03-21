@@ -1,0 +1,10 @@
+---
+
+- name: "{{ cron_taskname }}"
+  cron:
+    name: "Attempt of EAS2UD restart"
+    user: eas2
+    minute: "4,19,34,49"
+    job: "cd {{ INSTALL_HOME_DIR }}/{{ DIR_NAME }} && ./eas2ud start > /dev/null 2>> ${HOME}/crontab/log"
+    state: present
+    disabled: "{{ cron_off }}"

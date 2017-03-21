@@ -1,0 +1,25 @@
+---
+driver:
+  name: docker 
+  use_sudo: False
+  http_proxy: http://10.200.0.18:80
+  https_proxy: http://10.200.0.18:80
+  provision_command: sed -i '/tsflags=nodocs/d' /etc/yum.conf;echo "proxy=http://10.200.0.18:80" >> /etc/yum.conf 
+
+provisioner:
+  name: ansible_playbook
+  hosts: test-kitchen 
+  ansible_verbose: true
+  ansible_verbosity: 2 
+  ansible_version: latest
+  require_chef_for_busser: false
+  modules_path: ../../library
+
+platforms:
+  - name: centos-6.8
+    driver:
+      image: ironcore864/centos6ansible
+
+suites:
+  - name: default 
+

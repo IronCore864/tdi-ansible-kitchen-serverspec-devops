@@ -1,0 +1,7 @@
+---
+- cron:
+    name: "eas2 reallocate {{ item }}"
+    user: "eas2"
+    job: "{{ install_dir }}/reallocate.ctb {{ item }} /ib/mbin/EDI_EAS2/cfg 2>&1 | /ib/sw/ediscripts/logToEdistart.pl {{ cron_log_dir }}/log"
+  with_items: "{{ EAS2_REALLOCATE_INSTANCES }}"
+

@@ -1,0 +1,59 @@
+---
+driver:
+  name: docker
+  use_sudo: False
+  http_proxy: http://10.200.0.18:80
+  https_proxy: http://10.200.0.18:80
+  no_proxy: localhost,127.0.0.1,int.kn
+  provision_command: sed -i '/tsflags=nodocs/d' /etc/yum.conf;echo "proxy=http://10.200.0.18:80" >> /etc/yum.conf
+
+provisioner:
+  name: ansible_playbook
+  hosts: test-kitchen
+  ansible_verbose: true
+  ansible_verbosity: 3
+  ansible_version: latest
+  require_chef_for_busser: false
+  modules_path: library
+  roles_path: roles
+
+platforms:
+  - name: centos-6.8
+    driver:
+      image: ironcore864/centos6ansible
+
+suites:
+  - name: eas2-nfs-mount-bind-local
+    provisioner:
+      group_vars_path: inventories/dev/group_vars
+    driver:
+        name: docker
+        # see https://github.com/docker/docker/issues/16429
+        cap_add:
+            - SYS_ADMIN
+        security_opt:
+            - apparmor:unconfined
+  - name: eas2-nfs-no-mount
+    provisioner:
+      group_vars_path: inventories/dev/group_vars
+  - name: eas2version702-hsql
+  - name: eas2version732-cluster-config
+  - name: eas2version732-cluster-processing
+  - name: eas2version732-hsql
+  - name: eas2version732-https
+  - name: eas2version732-interface2
+  - name: eas2version732-mail
+  - name: eas2version732-mysql
+  - name: eas2version732-nostart
+  - name: eas2version732-prototype
+  - name: ilc
+  - name: kn-ib-tools
+  - name: mqhb
+  - name: kn-ibm-mqs
+    driver:
+      name: docker
+      volume:
+        - "/var/lib/docker/volumes/var_mqm:/var/mqm"
+  - name: reallocate
+  - name: ud
+  - name: vmprepare 

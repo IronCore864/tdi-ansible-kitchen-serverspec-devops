@@ -1,0 +1,75 @@
+CC_OK           0  No error.
+CC_UNDEF        1  Access to non-existent unit.
+CC_ARGC         2  Wrong number of arguments.
+CC_BADARG       8  Wrong argument.
+CC_FOPEN        10 Error during opening the file.
+CC_NORECS       11 Record not found.
+CC_FREAD        12 Error reading from file.
+CC_NOTFOUND     13 Read access: record does not exist.
+CC_FWRITE       14 Error writing to file.
+CC_FCLOSE       15 Failed to close the file.
+CC_BADKEY       16 Internal error in ISAM-key selection.
+CC_UNLINK       17 Failed to remove file.
+CC_FCREATE      18 Failed to create file.
+CC_BADREC       19 Read invalid record.
+CC_NORPROG      30 Error starting program.
+CC_PKILLED      31 Program forcibly stopped.
+CC_PSTOPPED     32 Program stopped.
+CC_BADDORG      33 Unexpected file originator.
+CC_MAXTRY       34 Maximum number of attempts reached.
+CC_CCR          35 CCR program was not found.
+CC_NLS_OPEN     40 NLS file can not be opened.
+CC_NLS_NOT_OPEN 41 NLS file has not been opened.
+CC_NLS_NO_MSG   42 NLS text was not found.
+CC_XOPEN        70 Error during X.25-Open.
+CC_XREDIR       71 Error during redirect.
+CC_XREAD        72 Error during X.25-Read.
+CC_XWRITE       73 Error during X.25-Write.
+CC_XCLOSE       74 Error during X.25-Close.
+CC_XCALL        75 Error during connection attempt (X.25-Call).
+CC_XBUFLEN      76 Error during access on X.25-buffer.
+CC_XGETCALL     77 Error while waiting for call (X.25-Getcall).
+CC_XCALLACC     78 Error while receiving call (X.25-Call-Accept).
+CC_INIT         80 Error during initialization.
+CC_ATTACH       81 Error during logging in (communication system).
+CC_DETACH       82 Error during logging out (communication system).
+CC_PROTOK       83 Protocol error during communication.
+CC_CONRQ        90 Error during Connect Request.
+CC_CONCE        91 Error during Connect Confirmation.
+CC_CONIN        92 Error during Connect Indication.
+CC_CONRS        93 Error during Connect Response.
+CC_REDIN        94 Error during Redirect Indication.
+CC_REDRQ        95 Error during Redirect Request.
+CC_DATARQ       96 Error during Send Data Request.
+CC_DATAIN       97 Error during Data Indication.
+CC_DISIN        98 Error during Disconnect Indication.
+CC_DISRQ        99 Error during Disconnect Request.
+ECL_OK          0  No error.
+ECL_RETRY       1  Repetition useful.
+ECL_RETRY_AC    2  Repetition after consultation.
+ECL_NO_RETRY    3  Repetition not useful.
+ECL_NEED_ADMIN  4  Intervention of administrator necessary.
+ETY_OK          0  No error.
+ETY_SW_ONE_CP   1  Software issue on our side. Only one partner is affected.
+ETY_SW_ALL_CP   2  Software issue on our side. All partner are affected.
+ETY_HW          3  Hardware issue.
+ETY_COMM        4  Communication issue.
+ETY_CP_SW       5  Software issue at a communication participant.
+ETY_CP_HW       6  Hardware issue at a communication participant.
+ETY_UNKNOWN     7  Unknown issue.
+EX_OK           0  The command did exit successfully.
+EX_USAGE        64 The command was used incorrectly.
+EX_DATAERR      65 The input data was incorrect in some way.
+EX_NOINPUT      66 An input file did not exist or was not readable.
+EX_NOUSER       67 The user specified did not exist.
+EX_NOHOST       68 The host specified did not exist.
+EX_UNAVAILABLE  69 A service was unavailable.
+EX_SOFTWARE     70 An internal software error has been detected.
+EX_OSERR        71 An operating system error has been detected.
+EX_OSFILE       72 Some system file does not exist, cannot be opened, or has some sort of error.
+EX_CANTCREAT    73 A user specified output file cannot be created.
+EX_IOERR        74 An error occurred while doing I/O on some file.
+EX_TEMPFAIL     75 Temporary failure, indicating something that is not really an error.
+EX_PROTOCOL     76 The remote system returned something that was ``not possible'' during a protocol exchange.
+EX_NOPERM       77 You did not have sufficient permission to perform the operation.
+EX_CONFIG       78 Something was found in an unconfigured or misconfigured state.

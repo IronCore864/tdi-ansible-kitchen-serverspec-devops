@@ -1,0 +1,8 @@
+---
+- name: Create reallocate configuration file
+  template:
+    src: "{{ EAS2_REALLOCATE_CFG_FILENAME }}"
+    dest: "{{ config_dir }}/reallocate.cfg"
+    owner: "eas2"
+    group: "as2"
+    mode: 0640
