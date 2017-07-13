@@ -1,2 +1,3 @@
 # tdi-ansible-kitchen-serverspec-devops
-My playbooks, roles, examples, test-kitchen, serverspec.
+Test-driven infrastructure
+Some examples of playbooks, roles, examples, test-kitchen, serverspec.
