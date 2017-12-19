@@ -1,0 +1,3 @@
+---
+- include_tasks: user_and_group.yml
+- include_tasks: host_ip.yml

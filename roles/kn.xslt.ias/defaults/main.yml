@@ -1,1 +1,0 @@
-installer: "http://repository.int.kn/nexus/service/local/artifact/maven/redirect?g=com.kn.ias&a=ias-shared-xsl-extensions-all&v=RELEASE&r=ias&p=zip"

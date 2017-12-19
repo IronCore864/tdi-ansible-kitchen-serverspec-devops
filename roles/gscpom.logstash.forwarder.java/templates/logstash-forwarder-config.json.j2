@@ -1,8 +1,0 @@
-{
-  "network": {
-   "servers": {{ logstash_hosts | to_json }},
-   "ssl ca": "{{ install_dir }}{{ dir_name }}/{{ key_file_name }}",
-   "timeout": {{ timeout }}
-  },
-  "files": {{ files | to_json }} 
-}

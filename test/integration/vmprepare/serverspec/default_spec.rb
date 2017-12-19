@@ -1,5 +1,5 @@
 require 'serverspec'
-require 'spec_helper'
+set :backend, :exec
 
 describe 'eas2 vm preparation' do
     describe user('eas2') do
@@ -11,7 +11,6 @@ describe 'eas2 vm preparation' do
     describe group('as2') do
       it { should exist }
     end
-
 
     describe file('/as2/eas2') do
         it { should exist }

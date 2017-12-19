@@ -1,7 +1,0 @@
----
-- name: Include default variables.
-  include_vars: default.yml
-
-# Setup/install tasks.
-- include: setup.yml
-

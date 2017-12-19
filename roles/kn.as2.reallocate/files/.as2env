@@ -1,2 +1,0 @@
-export FPATH=/ib/lib/ksh/env
-export EXIT_CODES_FILE=/ib/etc/codes/exitCodes.dat

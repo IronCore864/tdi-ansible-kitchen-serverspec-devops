@@ -5,17 +5,12 @@
     gid: 600
     state: present
 
-- name: Install ksh
-  yum:
-    name: ksh
-    state: latest
-
 - name: Ensure eas2 user exists.
   user:
     name: eas2
     uid: 600
     group: as2
-    shell: /bin/ksh
+    shell: /bin/bash
     state: present
 
 - name: Ensure as2 dir exists.

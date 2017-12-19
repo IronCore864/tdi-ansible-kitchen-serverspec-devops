@@ -1,6 +1,0 @@
-# install4j response file for e-AS2 7.3.1
-createDesktopLinkAction$Boolean=false
-sys.component.1161$Boolean=true
-sys.component.1440$Boolean=true
-licenseType$Integer=2
-clusterConfiguration$Integer=0

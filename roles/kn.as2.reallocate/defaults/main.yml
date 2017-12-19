@@ -1,6 +1,0 @@
-install_dir: /ib/mbin/EDI_EAS2/as2_host/scripts 
-config_dir: /ib/mbin/EDI_EAS2/cfg
-tosend_dir: /as2/eas2/tosend
-sem_dir: /ib/sem
-cron_log_dir: /as2/eas2/crontab
-EAS2_REALLOCATE_CFG_FILENAME: reallocate_global.cfg.j2

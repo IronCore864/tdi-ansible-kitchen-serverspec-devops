@@ -2,5 +2,5 @@
 - hosts: test-kitchen 
   become: True
   roles:
-    - role: kn.as2.vm.preparation
+    - role: preparation
       update_etc_hosts: false
