@@ -1,10 +1,13 @@
 version: 2
+ls -l vendor/bundle/ruby/
 jobs:
   build:
     machine:
       image: circleci/classic:latest
       services:
         - docker
+      ruby:
+        version: 2.4.0
 
     working_directory: ~/repo
 
@@ -30,11 +33,8 @@ jobs:
       - run:
           name: ls -l
           command: |
-            ls -l vendor/bundle/ruby/*/gems/test-kitchen*/bin
-      - run:
-          name: ls -l
-          command: |
-            ls -l vendor/bundle/ruby/
+            ls -l vendor/bundle/ruby/2.4.0/gems/test-kitchen*/bin
+
       - run:
           name: ls -l
           command: |
@@ -43,5 +43,5 @@ jobs:
       - run:
           name: run tests
           command: |
-            vendor/bundle/ruby/2.3.0/gems/test-kitchen*/bin/kitchen test
+            vendor/bundle/ruby/2.4.0/gems/test-kitchen*/bin/kitchen test
 
