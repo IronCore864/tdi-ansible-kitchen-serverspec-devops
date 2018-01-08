@@ -32,11 +32,7 @@ jobs:
       - run:
           name: ls -l
           command: |
-            ls -l vendor/bundle/ruby/2.4.0/gems/
-      - run:
-          name: ls -l
-          command: |
-            ls -l vendor/bundle/ruby/2.4.0/gems/bin/
+            ls -l vendor/bundle/ruby/2.4.0/gems/test-kitchen*/
         
       - run:
           name: run tests
