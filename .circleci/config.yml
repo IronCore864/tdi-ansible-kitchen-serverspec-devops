@@ -22,7 +22,7 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
+            bundle install
 
 #      - save_cache:
 #          paths:
@@ -30,21 +30,7 @@ jobs:
 #          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
       - run:
-          name: ls -l
-          command: |
-            users
-      - run:
-          name: ls -l
-          command: |
-            ls -l vendor/bundle/ruby/2.4.0/gems/test-kitchen*/bin
-
-      - run:
-          name: ls -l
-          command: |
-            ls -l /opt/circleci/.rvm/rubies/ruby-2.3.1/lib/ruby/site_ruby/2.3.0/rubygems
-        
-      - run:
           name: run tests
           command: |
-            vendor/bundle/ruby/2.4.0/gems/test-kitchen*/bin/kitchen test
+            kitchen test
 
