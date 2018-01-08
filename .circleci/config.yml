@@ -31,6 +31,14 @@ jobs:
           name: ls -l
           command: |
             ls -l vendor/bundle/ruby/*/gems/test-kitchen*/bin
+      - run:
+          name: ls -l
+          command: |
+            ls -l vendor/bundle/ruby/
+      - run:
+          name: ls -l
+          command: |
+            ls -l /opt/circleci/.rvm/rubies/ruby-2.3.1/lib/ruby/site_ruby/2.3.0/rubygems
         
       - run:
           name: run tests
