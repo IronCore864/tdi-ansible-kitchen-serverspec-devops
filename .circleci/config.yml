@@ -28,6 +28,11 @@ jobs:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+      - run:
+          name: ls -l
+          command: |
+            ls -l vendor/bundle
         
       - run:
           name: run tests
