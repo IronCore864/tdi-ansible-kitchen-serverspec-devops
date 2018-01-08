@@ -1,5 +1,4 @@
 version: 2
-ls -l vendor/bundle/ruby/
 jobs:
   build:
     machine:
