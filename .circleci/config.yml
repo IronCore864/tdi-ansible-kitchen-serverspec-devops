@@ -2,11 +2,11 @@ version: 2
 jobs:
   build:
     machine:
-      image: circleci/classic:201708-01
+      image: circleci/classic:latest
       services:
         - docker
       ruby:
-        version: 2.3.0
+        version: 2.4.0
 
     working_directory: ~/repo
 
