@@ -30,7 +30,7 @@ jobs:
       - run:
           name: ls -l
           command: |
-            ls -l vendor/bundle/ruby/2.3.0/gems/test-kitchen*/bin
+            ls -l vendor/bundle/ruby/*/gems/test-kitchen*/bin
         
       - run:
           name: run tests
