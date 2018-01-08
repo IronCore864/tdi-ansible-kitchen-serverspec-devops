@@ -1,15 +1,36 @@
-machine:
-  services:
-  - docker
-  ruby:
-    version: 2.3.0
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.4.1-node-browsers
 
-dependencies:
-  override:
-  - bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3:
-      timeout: 900
+    working_directory: ~/repo
 
-test:
-  override:
-  - bundle exec kitchen test:
-      timeout: 900
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "Gemfile.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run:
+          name: install dependencies
+          command: |
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - run:
+          name: Print the Current Time
+          command: date
+
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+        
+      # run tests!
+      - run:
+          name: run tests
+          command: |
+            kitchen test
+
