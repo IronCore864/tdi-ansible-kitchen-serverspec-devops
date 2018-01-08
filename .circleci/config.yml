@@ -1,8 +1,12 @@
 version: 2
 jobs:
   build:
-    docker:
-      - image: circleci/ruby:2.4.1-node-browsers
+    machine: true
+      image: circleci/classic:201708-01
+      services:
+        - docker
+      ruby:
+        version: 2.3.0
 
     working_directory: ~/repo
 
@@ -19,16 +23,12 @@ jobs:
           name: install dependencies
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
-      - run:
-          name: Print the Current Time
-          command: date
 
       - save_cache:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
         
-      # run tests!
       - run:
           name: run tests
           command: |
